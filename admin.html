@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Requirements Tracker</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('background.jpg'); /* Replace with your image URL */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: rgba(0, 191, 255, 0.9); /* Transparent sky-blue box */
+      width: 800px;
+      height: 500px;
+      border-radius: 15px;
+      padding: 20px;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .admin-circle {
+      width: 50px;
+      height: 50px;
+      background-color: #fafafa; /* Admin circle color */
+      color: rgb(0, 0, 0);
+      border-radius: 50%;
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .left-panel {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .button-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fafafa;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      position: relative;
+    }
+
+    .button-row:hover {
+      background-color: #e6e6e6;
+    }
+
+    .submission-count {
+      color: rgb(0, 0, 0);
+      font-size: 14px;
+      font-weight: bold;
+      margin-left: 10px;
+      opacity: 0;
+      position: absolute;
+      right: 10px;
+      transition: opacity 0.3s ease;
+    }
+
+    .button-row:hover .submission-count {
+      opacity: 1;
+    }
+
+    .right-panel {
+      float: right;
+      width: 65%;
+      height: 82%;
+      background-color: #ffffff;
+      border-radius: 15px;
+      position: relative;
+      padding: 20px;
+    }
+
+    .search-container {
+      display: flex;
+      margin-bottom: 10px;
+      background-color: white;
+      padding: 5px 10px;
+      border-radius: 10px;
+    }
+
+    .search-bar {
+      flex: 1;
+      border: none;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .search-icons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .filters {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    .filters li {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="admin-circle">ADMIN</div>
+    <h1>REQUIREMENTS TRACKER</h1>
+    <div class="left-panel">
+      <div class="button-row" id="formal137">
+        FORMAL 137
+        <span class="submission-count" id="formal137Count">Loading...</span>
+      </div>
+      <div class="button-row" id="formal138">
+        FORMAL 138
+        <span class="submission-count" id="formal138Count">Loading...</span>
+      </div>
+      <div class="button-row" id="psa">
+        PSA
+        <span class="submission-count" id="psaCount">Loading...</span>
+      </div>
+      <div class="button-row" id="goodmoral">
+        GOOD MORAL
+        <span class="submission-count" id="goodmoralCount">Loading...</span>
+      </div>
+      <div class="button-row" id="esc">
+        ESC
+        <span class="submission-count" id="escCount">Loading...</span>
+      </div>
+    </div>
+    <div class="right-panel">
+      <div class="search-container">
+        <input
+          type="text"
+          class="search-bar"
+          id="searchBar"
+          placeholder="Search name..."
+        />
+        <div class="search-icons">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/64/64572.png"
+            alt="Search Icon"
+            class="icon"
+          />
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1828/1828926.png"
+            alt="Bell Icon"
+            class="icon"
+          />
+        </div>
+      </div>
+      <ul class="filters" id="filteredList"></ul>
+    </div>
+  </div>
+
+  <script>
+    // Simulate an API call to fetch submission counts
+    function fetchSubmissionCounts() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({
+            formal137: Math.floor(Math.random() * 50),  // Random number of submissions for demonstration
+            formal138: Math.floor(Math.random() * 50),
+            psa: Math.floor(Math.random() * 50),
+            goodmoral: Math.floor(Math.random() * 50),
+            esc: Math.floor(Math.random() * 50),
+          });
+        }, 1000);
+      });
+    }
+
+    
+    async function updateCounts() {
+      const counts = await fetchSubmissionCounts();
+      for (const [key, count] of Object.entries(counts)) {
+        const countElement = document.getElementById(`${key}Count`);
+        if (countElement) {
+          countElement.textContent = count;
+        }
+      }
+    }
+
+    
+    updateCounts();
+
+ 
+    setInterval(updateCounts, 10000);
+
+    
+    const searchBar = document.getElementById("searchBar");
+    const filteredList = document.getElementById("filteredList");
+
+    const names = [
+      "John Doe",
+      "Jane Smith",
+      "Robert Brown",
+      "Emily Davis",
+      "Chris Johnson",
+    ];
+
+    searchBar.addEventListener("input", () => {
+      const query = searchBar.value.toLowerCase();
+      filteredList.innerHTML = ""; 
+      names
+        .filter((name) => name.toLowerCase().includes(query))
+        .forEach((filteredName) => {
+          const li = document.createElement("li");
+          li.textContent = filteredName;
+          filteredList.appendChild(li);
+        });
+    });
+  </script>
+</body>
+</html>

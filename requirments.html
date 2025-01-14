@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Requirements</title>
+  <link rel="stylesheet" href="requirments.css">
+</head>
+<body>
+  <div class="main-container" id="main-container">
+   
+    <div class="container requirements-panel" id="requirements-panel">
+      <div class="header">
+        <div class="profile">
+          <div class="profile-icon">
+            <button onclick="logout()" style="background-color: #ffffff; color: rgb(0, 0, 0); border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer;">
+              Log Out
+            </button>
+          </div>
+          <div class="student-name">CARL JUSTINE </div>
+        </div>
+        <button class="settings-icon" id="settings-btn">🔔</button>
+      </div>
+      <div class="requirements">
+        <h2>Requirements</h2>
+        <ul>
+          <li>
+            <span>Form 137</span>
+            <span class="status" data-status="true">✔</span>
+          </li>
+          <li>
+            <span>Form 138</span>
+            <span class="status" data-status="false">❌</span>
+          </li>
+          <li>
+            <span>Birth Certificate</span>
+            <span class="status" data-status="true">✔</span>
+          </li>
+          <li>
+            <span>Good Moral</span>
+            <span class="status" data-status="false">❌</span>
+          </li>
+          <li>
+            <span> ESC/QVR</span>
+            <span class="status" data-status="true">✔</span>
+          </li>
+          <button type="button" class="styled-button">❗</button>
+          <div id="message-container" class="hidden">
+            <button class="close-button">×</button>
+            <p>applies to students from private schools</p>
+              <p> from public schools can disregard it.</p>
+            </div>
+        </ul>
+      </div>
+    </div>
+
+   
+    <div class="container notification-panel" id="notification-panel">
+      <div class="notification">
+        <h3>Notifications</h3>
+        <p>Please submit your remaining requirements to clear your status!</p>
+        <button class="close-btn" id="close-btn">Back to Requirements</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="basta.js"></script>
+  <script src="ja.js"></script>
+
+</body>
+</html>
